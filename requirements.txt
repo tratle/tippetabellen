@@ -1,0 +1,6 @@
+beautifulsoup4==4.12.3
+dash==2.15.0
+pandas==2.2.2
+requests==2.31.0
+gunicorn
+dash-tools
