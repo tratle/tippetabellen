@@ -31,7 +31,7 @@ app.layout = html.Div([
     dash_table.DataTable(
         id='table',
         data=[{}],
-        # style_cell={'whiteSpace': 'normal', 'height': 'auto'},  
+        style_cell={'whiteSpace': 'normal', 'height': 'auto'},  
     ),
     dcc.Graph(
         id='graph',
