@@ -47,11 +47,16 @@ app.layout = html.Div([
 )
 
 def update_table(n):
-    if n > 0: 
+    if n > 0:
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'
+        }
+
         url = 'https://www.nifs.no/tabell.php?countryId=1&tournamentId=5&stageId=694961'
-        page = requests.get(url)
+        page = requests.get(url, headers=headers)
         soup = BeautifulSoup(page.content, 'html.parser')
-        table = soup.find_all('table')[0]
+        table = soup.find_all('table')[0] 
+        
         
         # Creating a pandas dataframe from the table
         df = pd.read_html(io.StringIO(str(table)))[0]
@@ -66,7 +71,7 @@ def update_table(n):
 
 
         # Import the predictions of the final table from 'Tipps.csv'
-        friends = pd.read_csv("https://github.com/tratle/tippetabellen/Tipps.csv", encoding='ISO-8859-1', sep=';')
+        friends = pd.read_csv("Tipps.csv", encoding='ISO-8859-1', sep=';')
 
         # Create a dataframe from the predictions
         df_friends = pd.DataFrame(friends)
@@ -150,3 +155,4 @@ def update_table(n):
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+
