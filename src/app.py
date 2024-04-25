@@ -28,8 +28,8 @@ df['Lag'] = df['Lag'].replace({"KFUM Oslo": 'KFUM', "Sarpsborg 08": 'Sarpsborg_0
 # Remove 'Form' column
 df = df.drop(columns=['Form'])
 
-# Import the predictions of the final table from 'Tipps.xlsx'
-friends = pd.read_excel(r"https://github.com/tratle/tippetabellen/Tipps.xlsx")
+# Import the predictions of the final table from 'Tipps.csv'
+friends = pd.read_csv("https://github.com/tratle/tippetabellen/Tipps.csv", encoding='ISO-8859-1', sep=';')
 
 # Create a dataframe from the predictions
 df_friends = pd.DataFrame(friends)
