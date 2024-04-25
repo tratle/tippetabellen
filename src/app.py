@@ -66,7 +66,7 @@ def update_table(n):
 
 
         # Import the predictions of the final table from 'Tipps.csv'
-        friends = pd.read_csv("Tipps.csv", encoding='ISO-8859-1', sep=';')
+        friends = pd.read_csv("https://github.com/tratle/tippetabellen/Tipps.csv", encoding='ISO-8859-1', sep=';')
 
         # Create a dataframe from the predictions
         df_friends = pd.DataFrame(friends)
