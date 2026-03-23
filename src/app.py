@@ -13,10 +13,7 @@ import requests
 
 
 NIFS_URL = "https://www.nifs.no/tabell.php?countryId=1&tournamentId=5&stageId=700911"
-TEAM_NAME_REMAP = {
-    "KFUM Oslo": "KFUM",
-    "Sarpsborg 08": "Sarpsborg_08",
-}
+
 
 
 def find_predictions_file() -> Path:
@@ -36,7 +33,7 @@ def find_predictions_file() -> Path:
 
 def load_predictions() -> pd.DataFrame:
     predictions = pd.read_csv(find_predictions_file(), encoding="latin1", sep=";")
-    predictions["Lag"] = predictions["Lag"].astype(str).str.strip().replace(TEAM_NAME_REMAP)
+    predictions["Lag"] = predictions["Lag"].astype(str).str.strip()
 
     for col in predictions.columns:
         if col != "Lag":
@@ -78,7 +75,7 @@ def fetch_live_standings() -> pd.DataFrame:
     standings = standings.loc[:, [c for c in standings.columns if c != "Form"]]
     standings = standings.loc[:, ~standings.columns.astype(str).str.startswith("Unnamed")]
 
-    standings["Lag"] = standings["Lag"].astype(str).str.strip().replace(TEAM_NAME_REMAP)
+    standings["Lag"] = standings["Lag"].astype(str).str.strip()
     standings["Nr"] = pd.to_numeric(standings["Nr"], errors="coerce")
     standings = standings.dropna(subset=["Lag", "Nr"]).sort_values("Nr")
     standings["Nr"] = standings["Nr"].astype(int)
